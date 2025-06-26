@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+body {
+  @apply bg-slate-50 text-slate-800;
+  font-family: 'Inter', sans-serif;
+}
+
+.btn {
+  @apply px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-indigo-600 text-white hover:bg-indigo-700 focus:ring-indigo-500;
+}
+
+.btn-secondary {
+  @apply bg-teal-600 text-white hover:bg-teal-700 focus:ring-teal-500;
+}
+
+.btn-outline {
+  @apply border border-slate-300 bg-white hover:bg-slate-50 text-slate-700;
+}
+
+.btn-danger {
+  @apply bg-red-600 text-white hover:bg-red-700 focus:ring-red-500;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 border border-slate-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent;
+}
+
+.card {
+  @apply bg-white rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow duration-200;
+}
+
+.nav-link {
+  @apply px-4 py-2 rounded-md font-medium transition-all duration-200 hover:bg-indigo-50 hover:text-indigo-600;
+}
+
+.nav-link-active {
+  @apply bg-indigo-50 text-indigo-600;
+}
+
+.gradient-bg {
+  background: linear-gradient(to right, #4338ca, #3b82f6);
+}
