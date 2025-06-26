@@ -1,0 +1,19 @@
+[
+    {
+        "rollNumber": "23a91a1290",
+        "name": "Bala",
+        "department": "IT",
+        "semester": "3-1",
+        "section": "A",
+        "subjects": [
+            {
+                "name": "Cloud Computing",
+                "attendedClasses": 1
+            }
+        ],
+        "totalAttendedClasses": 1,
+        "dates": {
+            "2025-06-23": 1
+        }
+    }
+]

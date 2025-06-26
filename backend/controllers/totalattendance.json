@@ -1,0 +1,325 @@
+[
+  {
+    "department": "DS",
+    "semester": "3-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Data Engineering",
+          "totalClassesConducted": 22
+        },
+        {
+          "name": "Probability and statics",
+          "totalClassesConducted": 9
+        },
+        {
+          "name": "Optimization Technics",
+          "totalClassesConducted": 5
+        },
+        {
+          "name": "DLCO",
+          "totalClassesConducted": 13
+        }
+      ],
+      "totalClassesConducted": 58,
+      "dates": {
+        "2025-05-31": 4,
+        "2025-06-01": 4,
+        "2025-06-02": 4,
+        "2025-06-03": 4,
+        "2025-06-09": 4,
+        "2025-06-10": 5,
+        "2025-06-11": 2,
+        "2025-06-20": 3,
+        "2025-06-22": 5,
+        "2025-06-23": 7,
+        "2025-06-24": 6
+      }
+    }
+  },
+  {
+    "department": "DS",
+    "semester": "3-1",
+    "section": "B",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Data Engineering",
+          "totalClassesConducted": 5
+        },
+        {
+          "name": "Probability and statics",
+          "totalClassesConducted": 20
+        },
+        {
+          "name": "Optimization Technics",
+          "totalClassesConducted": 30
+        },
+        {
+          "name": "DLCO",
+          "totalClassesConducted": 50
+        }
+      ],
+      "totalClassesConducted": 112,
+      "dates": {
+        "2025-05-31": 4,
+        "2025-06-01": 4,
+        "2025-06-02": 4,
+        "2025-06-03": 4,
+        "2025-06-09": 1,
+        "2025-06-10": 1
+      }
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "3-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "MATHS",
+          "totalClassesConducted": 4
+        },
+        {
+          "name": "PHYSICS",
+          "totalClassesConducted": 4
+        },
+        {
+          "name": "CHEMISTRY",
+          "totalClassesConducted": 3
+        },
+        {
+          "name": "ENGLISH",
+          "totalClassesConducted": 5
+        },
+        {
+          "name": "Computer Networks",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 17,
+      "dates": {
+        "2025-05-31": 4,
+        "2025-06-01": 4,
+        "2025-06-02": 4,
+        "2025-06-03": 4,
+        "2025-06-22": 1
+      }
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "3-2",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Compiler Design",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-11": 1
+      }
+    }
+  },
+  {
+    "department": "DS",
+    "semester": "1-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Intro to Data Science",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-22": 1
+      }
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "1-2",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Python Programming",
+          "totalClassesConducted": 0
+        }
+      ],
+      "totalClassesConducted": 0,
+      "dates": {}
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "1-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "C Programming",
+          "totalClassesConducted": 1
+        },
+        {
+          "name": "English",
+          "totalClassesConducted": 1
+        },
+        {
+          "name": "Engineering Maths",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 3,
+      "dates": {
+        "2025-06-20": 1,
+        "2025-06-22": 2
+      }
+    }
+  },
+  {
+    "department": "AIML",
+    "semester": "1-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Basics of AI",
+          "totalClassesConducted": 2
+        }
+      ],
+      "totalClassesConducted": 2,
+      "dates": {
+        "2025-06-20": 1,
+        "2025-06-22": 1
+      }
+    }
+  },
+  {
+    "department": "AIML",
+    "semester": "2-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "ML",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-20": 1
+      }
+    }
+  },
+  {
+    "department": "IT",
+    "semester": "3-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Cyber Security",
+          "totalClassesConducted": 1
+        },
+        {
+          "name": "Cloud Computing",
+          "totalClassesConducted": 2
+        }
+      ],
+      "totalClassesConducted": 3,
+      "dates": {
+        "2025-06-22": 1,
+        "2025-06-23": 2
+      }
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "2-1",
+    "section": "C",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "DSA",
+          "totalClassesConducted": 0
+        }
+      ],
+      "totalClassesConducted": 0,
+      "dates": {}
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "2-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "DSA",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-22": 1
+      }
+    }
+  },
+  {
+    "department": "IT",
+    "semester": "2-1",
+    "section": "A",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Web Development",
+          "totalClassesConducted": 0
+        }
+      ],
+      "totalClassesConducted": 0,
+      "dates": {}
+    }
+  },
+  {
+    "department": "IT",
+    "semester": "2-1",
+    "section": "B",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "Software Engineering",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-23": 1
+      }
+    }
+  },
+  {
+    "department": "CSE",
+    "semester": "2-1",
+    "section": "B",
+    "attendanceSummary": {
+      "subjects": [
+        {
+          "name": "DSA",
+          "totalClassesConducted": 1
+        }
+      ],
+      "totalClassesConducted": 1,
+      "dates": {
+        "2025-06-24": 1
+      }
+    }
+  }
+]

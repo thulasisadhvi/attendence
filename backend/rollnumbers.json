@@ -1,0 +1,258 @@
+{
+  "7db7f98aac": {
+    "year": "2nd",
+    "semester": "2-1",
+    "department": "IT",
+    "section": "B",
+    "subject": "Software Engineering",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "7db7f98aac",
+    "timestamp": "2025-06-23T14:56:04.069+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  },
+  "7ee476a59e": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "201",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "7ee476a59e",
+    "timestamp": "2025-06-23T17:41:00.791+05:30",
+    "status": "active",
+    "attendedRollNumbers": []
+  },
+  "bea6c3dc93": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Data Engineering",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "bea6c3dc93",
+    "timestamp": "2025-06-23T22:26:21.010+05:30",
+    "status": "active",
+    "attendedRollNumbers": []
+  },
+  "f0f1c6dc07": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Data Engineering",
+    "block": "Block-B",
+    "room": "202",
+    "period": "2",
+    "facultyName": "Dr. Sai Satish",
+    "token": "f0f1c6dc07",
+    "timestamp": "2025-06-23T22:45:53.500+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  },
+  "3dbbe93e1d": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "3dbbe93e1d",
+    "timestamp": "2025-06-23T22:55:41.506+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  },
+  "7f37ee2be4": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "7f37ee2be4",
+    "timestamp": "2025-06-23T23:34:35.083+05:30",
+    "status": "active",
+    "attendedRollNumbers": [
+      "23a91a129"
+    ]
+  },
+  "07f1d7b794": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "07f1d7b794",
+    "timestamp": "2025-06-23T23:41:37.237+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "23a91a1290"
+    ]
+  },
+  "8f1b668ddb": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "201",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "8f1b668ddb",
+    "timestamp": "2025-06-23T23:48:43.643+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  },
+  "682346d45c": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "IT",
+    "section": "A",
+    "subject": "Cloud Computing",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "682346d45c",
+    "timestamp": "2025-06-23T23:53:18.224+05:30",
+    "status": "active",
+    "attendedRollNumbers": [
+      "23a91a1290"
+    ]
+  },
+  "62f5ea071f": {
+    "year": "2nd",
+    "semester": "2-1",
+    "department": "CSE",
+    "section": "B",
+    "subject": "DSA",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "62f5ea071f",
+    "timestamp": "2025-06-24T09:55:10.968+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  },
+  "f623769a66": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Data Engineering",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "f623769a66",
+    "timestamp": "2025-06-24T09:58:31.728+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "24a91a4414"
+    ]
+  },
+  "fdb4cff0ff": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Data Engineering",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "fdb4cff0ff",
+    "timestamp": "2025-06-24T10:00:26.287+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "24a91a4414"
+    ]
+  },
+  "0192bcb943": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Probability and statics",
+    "block": "Block-B",
+    "room": "202",
+    "period": "7",
+    "facultyName": "Dr. Sai Satish",
+    "token": "0192bcb943",
+    "timestamp": "2025-06-24T10:07:09.446+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "23a91a4464"
+    ]
+  },
+  "a5ce61028a": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Probability and statics",
+    "block": "Block-B",
+    "room": "202",
+    "period": "7",
+    "facultyName": "Dr. Sai Satish",
+    "token": "a5ce61028a",
+    "timestamp": "2025-06-24T10:14:34.038+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "23a91a4464"
+    ]
+  },
+  "0aa5b6dd66": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "DLCO",
+    "block": "Block-B",
+    "room": "202",
+    "period": "1",
+    "facultyName": "Dr. Sai Satish",
+    "token": "0aa5b6dd66",
+    "timestamp": "2025-06-24T11:14:54.245+05:30",
+    "status": "expired",
+    "attendedRollNumbers": [
+      "24a91a4414"
+    ]
+  },
+  "02c0e56dc7": {
+    "year": "3rd",
+    "semester": "3-1",
+    "department": "DS",
+    "section": "A",
+    "subject": "Probability and statics",
+    "block": "Block-A",
+    "room": "101",
+    "period": "3",
+    "facultyName": "Dr. Sai Satish",
+    "token": "02c0e56dc7",
+    "timestamp": "2025-06-24T11:18:54.039+05:30",
+    "status": "expired",
+    "attendedRollNumbers": []
+  }
+}

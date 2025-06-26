@@ -1,0 +1,71 @@
+{
+  "Block-A": {
+    "101": {
+      "latitude": 17.0922891,
+      "longitude": 82.0689014,
+      "radius_meters": 100
+    },
+
+    "102": {
+     "latitude": 17.0922891,
+      "longitude": 82.0689014,
+      "radius_meters": 10000
+    },
+    "103": {
+     "latitude": 17.0922891,
+      "longitude": 82.0689014,
+      "radius_meters": 1000
+    }
+  },
+  "Block-B": {
+    "201": {
+      "latitude": 17.089771,
+      "longitude":82.066796,
+      "radius_meters": 100000
+    },
+    "202": {
+      "latitude": 17.089771,
+      "longitude":82.066796,
+      "radius_meters": 100000
+    },
+    "203": {
+      "latitude": 17.089771,
+      "longitude":82.066796,
+      "radius_meters": 100000
+    }
+  },
+  "Block-C": {
+    "301": {
+      "latitude": 17.0285,
+      "longitude": 81.7923,
+      "radius_meters": 50
+    },
+    "302": {
+      "latitude": 17.0286,
+      "longitude": 81.7924,
+      "radius_meters": 50
+    },
+    "303": {
+      "latitude": 17.0287,
+      "longitude": 81.7925,
+      "radius_meters": 50
+    }
+  },
+  "Block-D": {
+    "401": {
+      "latitude": 17.0290,
+      "longitude": 81.7928,
+      "radius_meters": 50
+    },
+    "402": {
+      "latitude": 17.0291,
+      "longitude": 81.7929,
+      "radius_meters": 50
+    },
+    "403": {
+      "latitude": 17.0292,
+      "longitude": 81.7930,
+      "radius_meters": 50
+    }
+  }
+}

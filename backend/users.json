@@ -1,0 +1,67 @@
+[
+  {
+    "id": "1750422964701",
+    "rollNumber": "24A95A4405",
+    "name": "R Sai Satish",
+    "email": "24A95A4405@aec.edu.in",
+    "password": "12345678",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semester": "3-1",
+    "phone": "9492188027",
+    "role": "student"
+  },
+  {
+    "id": "1750436775771",
+    "rollNumber": "23a91a1290",
+    "name": "Bala",
+    "email": "23a91a1290@aec.edu.in",
+    "password": "12345678",
+    "department": "IT",
+    "year": "3",
+    "section": "A",
+    "semester": "3-1",
+    "phone": "9492188027",
+    "role": "student"
+  },
+  {
+    "id": "1750670241063",
+    "rollNumber": "24A91A4414",
+    "name": "chodapuneedi thulasi sadhvi",
+    "email": "sadhvi@gmail.com",
+    "password": "12345678",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semester": "3-1",
+    "phone": "9381123456",
+    "role": "student"
+  },
+  {
+    "id": "1750680623493",
+    "rollNumber": "23a91a129",
+    "name": "Bala",
+    "email": "23a91a129@aec.edu.in",
+    "password": "12345678",
+    "department": "IT",
+    "year": "3",
+    "section": "A",
+    "semester": "3-1",
+    "phone": "9381123456",
+    "role": "student"
+  },
+  {
+    "id": "1750739764826",
+    "rollNumber": "23A91A4464",
+    "name": "swaritha",
+    "email": "23a91a4464@aec.edu.in",
+    "password": "12345678",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semester": "3-1",
+    "phone": "7863635823",
+    "role": "student"
+  }
+]

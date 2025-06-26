@@ -1,0 +1,90 @@
+[
+    {
+        "rollNumber": "24A95A4405",
+        "name": "R Sai Satish",
+        "department": "DS",
+        "semester": "3-1",
+        "section": "A",
+        "subjects": [
+            {
+                "name": "Data Engineering",
+                "attendedClasses": 2
+            },
+            {
+                "name": "Probability and statics",
+                "attendedClasses": 1
+            },
+            {
+                "name": "Optimization Technics",
+                "attendedClasses": 1
+            },
+            {
+                "name": "DLCO",
+                "attendedClasses": 4
+            }
+        ],
+        "totalAttendedClasses": 8,
+        "dates": {
+            "2025-05-31": 1,
+            "2025-06-01": 1,
+            "2025-06-02": 2,
+            "2025-06-03": 4,
+            "2025-06-20": 1
+        }
+    },
+    {
+        "rollNumber": "23a91a129",
+        "name": "Bala",
+        "department": "IT",
+        "semester": "3-1",
+        "section": "A",
+        "subjects": [
+            {
+                "name": "Cloud Computing",
+                "attendedClasses": 1
+            }
+        ],
+        "totalAttendedClasses": 1,
+        "dates": {
+            "2025-06-23": 1
+        }
+    },
+    {
+        "rollNumber": "24A91A4414",
+        "name": "chodapuneedi sadhvi",
+        "department": "DS",
+        "semester": "3-1",
+        "section": "A",
+        "subjects": [
+            {
+                "name": "Data Engineering",
+                "attendedClasses": 2
+            },
+            {
+                "name": "DLCO",
+                "attendedClasses": 1
+            }
+        ],
+        "totalAttendedClasses": 3,
+        "dates": {
+            "2025-06-24": 3
+        }
+    },
+    {
+        "rollNumber": "23A91A4464",
+        "name": "swaritha",
+        "department": "DS",
+        "semester": "3-1",
+        "section": "A",
+        "subjects": [
+            {
+                "name": "Probability and statics",
+                "attendedClasses": 1
+            }
+        ],
+        "totalAttendedClasses": 1,
+        "dates": {
+            "2025-06-24": 1
+        }
+    }
+]

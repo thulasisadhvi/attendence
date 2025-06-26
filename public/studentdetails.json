@@ -1,0 +1,132 @@
+{
+  "1stYear": {
+    "CSE": {
+      "A": [
+        { "rollNumber": "CSE1A001", "name": "Alice Johnson", "department": "CSE" },
+        { "rollNumber": "CSE1A002", "name": "Bob Smith", "department": "CSE" },
+        { "rollNumber": "CSE1A003", "name": "Carol Lee", "department": "CSE" }
+      ],
+      "B": [
+        { "rollNumber": "CSE1B001", "name": "David Kim", "department": "CSE" },
+        { "rollNumber": "CSE1B002", "name": "Eva Green", "department": "CSE" }
+      ],
+      "C": [
+        { "rollNumber": "CSE1C001", "name": "Frank White", "department": "CSE" }
+      ]
+    },
+    "DS": {
+      "A": [
+        { "rollNumber": "DS1A001", "name": "Grace Park", "department": "DS" },
+        { "rollNumber": "DS1A002", "name": "Henry Adams", "department": "DS" }
+      ],
+      "B": [],
+      "C": []
+    },
+    "MECH": {
+      "A": [
+        { "rollNumber": "MECH1A001", "name": "Ivy Chen", "department": "MECH" }
+      ],
+      "B": [],
+      "C": []
+    },
+    "CIVIL": {
+      "A": [],
+      "B": [],
+      "C": []
+    }
+  },
+  "2ndYear": {
+    "CSE": {
+      "A": [
+        { "rollNumber": "CSE2A001", "name": "Jake Turner", "department": "CSE" },
+        { "rollNumber": "CSE2A002", "name": "Lily Evans", "department": "CSE" }
+      ],
+      "B": [
+        { "rollNumber": "CSE2B001", "name": "Mason Brooks", "department": "CSE" }
+      ],
+      "C": []
+    },
+    "DS": {
+      "A": [],
+      "B": [
+        { "rollNumber": "DS2B001", "name": "Nina Shah", "department": "DS" }
+      ],
+      "C": []
+    },
+    "MECH": {
+      "A": [],
+      "B": [],
+      "C": [
+        { "rollNumber": "MECH2C001", "name": "Oscar Diaz", "department": "MECH" }
+      ]
+    },
+    "CIVIL": {
+      "A": [],
+      "B": [],
+      "C": []
+    }
+  },
+  "3rdYear": {
+    "CSE": {
+      "A": [
+        { "rollNumber": "23432CSE", "name": "ALAMANDA", "department": "CSE" }
+      ],
+      "B": [],
+      "C": []
+    },
+    "DS": {
+      "A": [
+        { "rollNumber": "23A91A4404", "name": "A.PRANEETHA", "department": "DS" },
+         { "rollNumber": "23A91A4414", "name": "CH.SADHVI", "department": "DS" },
+          { "rollNumber": "23A91A4461", "name": "T.DEEPIKA", "department": "DS" },
+           { "rollNumber": "23A91A4464", "name": "Y.SWARITHA", "department": "DS" },
+            { "rollNumber": "24A95A4401", "name": "G.VISHNU", "department": "DS" },
+             { "rollNumber": "24A95A4401", "name": "R.SAI SATISH", "department": "DS" }
+      ],
+      "B": [],
+      "C": []
+    },
+    "MECH": {
+      "A": [],
+      "B": [
+        { "rollNumber": "MECH3B001", "name": "Ryan Cole", "department": "MECH" }
+      ],
+      "C": []
+    },
+    "CIVIL": {
+      "A": [],
+      "B": [],
+      "C": [
+        { "rollNumber": "CIVIL3C001", "name": "Sophia Patel", "department": "CIVIL" }
+      ]
+    }
+  },
+  "4thYear": {
+    "CSE": {
+      "A": [],
+      "B": [
+        { "rollNumber": "CSE4B001", "name": "Tom Harris", "department": "CSE" }
+      ],
+      "C": []
+    },
+    "DS": {
+      "A": [
+        { "rollNumber": "DS4A001", "name": "Uma Singh", "department": "DS" }
+      ],
+      "B": [],
+      "C": []
+    },
+    "MECH": {
+      "A": [],
+      "B": [],
+      "C": []
+    },
+    "CIVIL": {
+      "A": [
+        { "rollNumber": "CIVIL4A001", "name": "Victor Wong", "department": "CIVIL" }
+      ],
+      "B": [],
+      "C": []
+    }
+  }
+}

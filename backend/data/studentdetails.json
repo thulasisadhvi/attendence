@@ -1,0 +1,29 @@
+[
+  {
+    "rollNumber": "24A95A4405",
+    "name": "R Sai Satish",
+    "email":"24A95A4405@aec.edu.in",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semister":"3-1"
+  }, 
+  {
+    "rollNumber": "23A91A4414",
+    "name": "CH. THULASI SADHVI",
+    "email":"23A91A4414@aec.edu.in",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semister":"3-1"
+  },
+  {
+    "rollNumber": "23A91A4464",
+    "name": "Y. SWARITHA",
+    "email":"23A91A4464@aec.edu.in",
+    "department": "DS",
+    "year": "3",
+    "section": "A",
+    "semister":"3-1"
+  }
+]

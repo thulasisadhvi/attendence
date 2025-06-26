@@ -1,0 +1,6 @@
+flask
+deepface
+mtcnn
+opencv-python
+numpy
+
