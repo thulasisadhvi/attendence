@@ -10,8 +10,7 @@ require('dotenv').config(); // Load environment variables from .env file
 // For a local MongoDB instance, it might look like: 'mongodb://localhost:27017/your_database_name'
 // For MongoDB Atlas, it will be a longer connection string provided by Atlas.
 // Now, MONGODB_URI will be loaded from your .env file
-const MONGODB_URI = process.env.MONGODB_URI;
-
+const MONGODB_URI = process.env.MONGO_URI;
 const connectDB = async () => {
   try {
     // Check if MONGODB_URI is defined
