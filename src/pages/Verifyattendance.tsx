@@ -232,7 +232,7 @@ const VerifyAttendancePage: React.FC = () => {
             console.log(`Face recognized: ${flaskData.rollNumber}. Attempting to mark attendance via Node.js...`);
             try {
               const nodeResponse = await axios.post<MarkAttendanceResponse>(
-                'http://localhost:5000/api/mark-attendance', // Node.js backend URL and new endpoint
+                'https://attendence-vo5j.onrender.com/api/mark-attendance', // Node.js backend URL and new endpoint
                 {
                   rollNumber: flaskData.rollNumber,
                   token: token // Send the token from the URL to Node.js
@@ -319,7 +319,7 @@ const VerifyAttendancePage: React.FC = () => {
         setLoading(true);
         setError(null); // Clear previous errors
         const response = await axios.get<PeriodData>(
-          `http://localhost:5000/api/period?token=${token}` // Assumed Node.js backend for period data
+          `https://attendence-vo5j.onrender.com/api/period?token=${token}` // Assumed Node.js backend for period data
         );
         const fetchedData = response.data;
         setPeriodData(fetchedData);
@@ -401,7 +401,7 @@ const VerifyAttendancePage: React.FC = () => {
         try {
           // Send student's location and expected room to your backend for verification
           // Assuming this is also a Node.js endpoint, as the Python app doesn't have it
-          const response = await axios.post('http://localhost:5000/api/verify-location', { 
+          const response = await axios.post('https://attendence-vo5j.onrender.com/api/verify-location', { 
             studentLatitude,
             studentLongitude,
             block: periodData.block,
