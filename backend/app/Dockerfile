@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 # Set working directory
-WORKDIR /app
+WORKDIR backend/app
 
 # Install system dependencies (important for OpenCV, TensorFlow)
 RUN apt-get update && apt-get install -y \
