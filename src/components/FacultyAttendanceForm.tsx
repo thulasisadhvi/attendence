@@ -114,7 +114,7 @@ const FacultyAttendanceForm: React.FC<FacultyAttendanceFormProps> = ({ onGenerat
 
     try {
       // Send data to backend ONLY if confirmed
-      await axios.post('http://localhost:5000/api/save-period-and-update-attendance', currentFormData);
+      await axios.post('https://attendence-vo5j.onrender.com/api/save-period-and-update-attendance', currentFormData);
       onGenerateQR(currentFormData); // Call parent QR generation function
       alert('QR code generated and attendance updated successfully!');
       setShowConfirmation(false); // Close confirmation dialog
