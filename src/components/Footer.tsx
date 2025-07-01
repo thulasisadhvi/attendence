@@ -115,11 +115,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="text-center mt-12 pt-8 border-t border-gray-800">
-          <p className="text-gray-400">
-           
-          </p>
-        </div>
+      
       </div>
     </footer>
   );
