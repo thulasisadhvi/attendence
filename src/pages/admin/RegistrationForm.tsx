@@ -330,7 +330,7 @@ const RegistrationForm: React.FC = () => {
         role: 'student', // Default role
       };
 
-      const nodeResponse = await fetch('http://localhost:5000/api/register-student', { 
+      const nodeResponse = await fetch('https://attendence-vo5j.onrender.com/api/register-student', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
