@@ -24,7 +24,7 @@ const StudentProfile: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
 
     // API base URL - ensure this is correctly configured in your .env file
-    const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+    const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://attendence-vo5j.onrender.com';
 
     // Redirect if no user or not student (authentication check)
     // This should ideally happen higher up in your routing, but kept here for self-containment.
