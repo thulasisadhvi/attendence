@@ -60,7 +60,7 @@ export interface Student {
 const StudentAttendance: React.FC = () => {
   // State to store student data, similar to StudentData.tsx
   const [students, setStudents] = useState<Student[]>([]);
-  const API_BASE_URL = 'http://localhost:5000/api/students'; // Your backend API endpoint
+  const API_BASE_URL = 'https://attendence-vo5j.onrender.com/api/students'; // Your backend API endpoint
 
   // Function to fetch students from the backend API, similar to StudentData.tsx
   const fetchStudents = async () => {
