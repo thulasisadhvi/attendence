@@ -203,7 +203,7 @@ const QRCodeDisplay = () => {
             )}
 
             <div className="bg-gray-50 p-4 rounded-xl text-gray-700 text-sm mb-6">
-                <h3 className="font-semibold text-gray-800 mb-2">Period Info: sai satish</h3>
+                <h3 className="font-semibold text-gray-800 mb-2">Period Info:</h3>
                 <ul className="grid grid-cols-2 gap-x-4 gap-y-1">
                     {Object.entries(periodData).map(([key, value]) => (
                         (key !== 'token' && key !== 'timestamp' && key !== 'status') && (
