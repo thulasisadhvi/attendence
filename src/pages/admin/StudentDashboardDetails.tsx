@@ -66,7 +66,7 @@ const StudentDashboardDetails: React.FC<StudentDashboardDetailsProps> = ({ rollN
             setLoading(true);
             setError(null);
             try {
-                const response = await fetch(`http://localhost:5000/api/view/dashboard/student/${rollNumber}`);
+                const response = await fetch(`https://attendence-vo5j.onrender.com/api/view/dashboard/student/${rollNumber}`);
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
