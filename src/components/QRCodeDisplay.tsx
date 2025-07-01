@@ -68,7 +68,7 @@ const QRCodeDisplay = () => {
 
     useEffect(() => {
         // Fetch period data from your backend's /latest endpoint
-        axios.get<PeriodData>('http://localhost:5000/api/period/latest')
+        axios.get<PeriodData>('https://attendence-vo5j.onrender.com/api/period/latest')
             .then(res => {
                 const data = res.data;
                 setPeriodData(data);
