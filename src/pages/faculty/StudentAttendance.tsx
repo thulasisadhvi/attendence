@@ -67,7 +67,7 @@ const StudentAttendance: React.FC = () => {
     const [students, setStudents] = useState<Student[]>([]);
     const [loadingStudents, setLoadingStudents] = useState<boolean>(true); // Renamed for clarity
     const [studentsError, setStudentsError] = useState<string | null>(null); // Renamed for clarity
-    const API_BASE_URL = 'http://localhost:5000/api/students'; // Your backend API endpoint
+    const API_BASE_URL = 'https://attendence-vo5j.onrender.com/api/students'; // Your backend API endpoint
 
     const { user, isLoggedIn, isLoading, error: authError } = useAuth(); // Get auth state
     const navigate = useNavigate();
