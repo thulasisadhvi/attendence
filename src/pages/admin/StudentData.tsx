@@ -57,7 +57,7 @@ export interface Student {
 
 const StudentData: React.FC = () => {
   const [students, setStudents] = useState<Student[]>([]);
-  const API_BASE_URL = 'http://localhost:5000/api/students';
+  const API_BASE_URL = 'https://attendence-vo5j.onrender.com/api/students';
 
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [editingStudentId, setEditingStudentId] = useState<string | null>(null);
