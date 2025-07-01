@@ -38,7 +38,7 @@ const History: React.FC = () => {
         setLoadingData(true);
         setDataError(null);
         try {
-            const response = await axios.get<PeriodEntry[]>(`http://localhost:5000/api/history?facultyName=${encodeURIComponent(facultyName)}`);
+            const response = await axios.get<PeriodEntry[]>(`https://attendence-vo5j.onrender.com/api/history?facultyName=${encodeURIComponent(facultyName)}`);
             const sortedData = response.data.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
             setHistoryData(sortedData);
         } catch (err) {
@@ -104,7 +104,7 @@ const History: React.FC = () => {
         setShowConfirmModal(false);
 
         try {
-            await axios.delete(`http://localhost:5000/api/history/${itemToDeleteToken}`);
+            await axios.delete(`https://attendence-vo5j.onrender.com/api/history/${itemToDeleteToken}`);
             showFeedbackMessage('Period entry deleted successfully!', 'success');
             if (user.name) { // Re-fetch history for the current faculty after deletion
                 fetchHistory(user.name);
