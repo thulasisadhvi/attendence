@@ -133,11 +133,12 @@ const QRCodeDisplay = () => {
     }
 
     // --- MODIFIED SECTION ---
-    // The QR code value will still be the full periodData object for now,
-    // as your current backend /api/period endpoint expects the full data or at least the token to retrieve it.
-    // However, the `shareLink` will now only contain the token.
-    const qrCodeValue = JSON.stringify(periodData); // Keep QR code value as full object for your current /api/period endpoint to work
-    const shareLink = `${window.location.origin}/verf?token=${periodData.token}`; // <-- Changed to use token
+    // The `shareLink` will now contain the token-based URL.
+    const shareLink = `${window.location.origin}/verf?token=${periodData.token}`;
+
+    // --- CRUCIAL CHANGE HERE: Embed the URL in the QR code ---
+    // The QR code value is now the shareLink, so scanners will open the URL.
+    const qrCodeValue = shareLink; // Changed from JSON.stringify(periodData)
 
     const handleCopy = async () => {
         if (isExpired) {
@@ -190,9 +191,7 @@ const QRCodeDisplay = () => {
             ) : (
                 <>
                     <div className="flex justify-center bg-gray-50 p-4 rounded-xl shadow-inner mb-6">
-                        {/* The QR code itself will still embed the full periodData object. */}
-                        {/* This is because your backend's /api/period endpoint (for QR scanning) */}
-                        {/* expects the full data (or at least the token within that data) to retrieve the entry. */}
+                        {/* The QR code now directly embeds the shareLink URL */}
                         {qrCodeValue && <QRCode value={qrCodeValue} size={180} />}
                     </div>
 
