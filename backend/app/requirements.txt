@@ -12,3 +12,4 @@ torchaudio
 Pillow    
 python-dotenv
 cloudinary
+Flask-Cors
