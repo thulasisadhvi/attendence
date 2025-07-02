@@ -302,7 +302,7 @@ const RegistrationForm: React.FC = () => {
         flaskFormData.append('images', blob, `face_image_${index + 1}.jpg`);
       });
 
-      const flaskResponse = await fetch('http://localhost:8000/register-face', { 
+      const flaskResponse = await fetch('https://flask-jzc9.onrender.com/register-face', { 
         method: 'POST',
         body: flaskFormData,
       });
