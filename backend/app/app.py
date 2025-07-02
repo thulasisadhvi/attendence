@@ -13,9 +13,20 @@ from pymongo import MongoClient # Import MongoClient for MongoDB
 
 # Import functions from face_utils and pipeline
 # Assuming these files (face_utils.py, utils/pipeline.py) are in the same directory structure
-from face_utils import save_embeddings # Used in register_face to build embeddings.pkl
+#from face_utils import save_embeddings # Used in register_face to build embeddings.pkl
+from face_utils import register_and_upload_embedding
 from utils.pipeline import process_frame, reload_embeddings # Used in recognize and to refresh in-memory embeddings
-
+import cloudinary
+import cloudinary.uploader
+import os
+from dotenv import load_dotenv
+load_dotenv()
+# Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
+)
 app = Flask(__name__)
 CORS(app) # Enable CORS for all routes by default, including for specific origins where needed
 
@@ -29,7 +40,7 @@ APP_PASSWORD = "pesh fmzr jocf gmuk"    # <--- IMPORTANT: Replace with your actu
 # --- MongoDB Configuration ---
 # Get MongoDB URI from environment variable (ensure it's set in your .env or environment)
 # Example: MONGODB_URI=mongodb://localhost:27017/myStudentsDB
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb://localhost:27017/myStudentsDB")
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://sairajapanthula:YOUR_NEW_SECURE_PASSWORD@attendancedb.kvglgey.mongodb.net/AttendnaceDB?retryWrites=true&w=majority")
 DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0] # Extract database name from URI
 # Connect to MongoDB
 try:
@@ -45,7 +56,7 @@ except Exception as e:
 # --- Original users.json file path - NO LONGER USED FOR AUTH, kept for other potential uses if needed ---
 # USERS_DB_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'users.json')
 
-FRONTEND_URL = "http://localhost:5173" # Update if your frontend is on a different URL/port
+FRONTEND_URL = "https://attendence-mu.vercel.app/" # Update if your frontend is on a different URL/port
 
 # ------------------ Utilities for Email/User Management ------------------
 # load_users and save_users are NO LONGER USED FOR AUTHENTICATION
@@ -104,10 +115,6 @@ def send_email(to_email, reset_token):
 # ------------------ Face Recognition Routes ---
 @app.route("/register-face", methods=["POST"])
 def register_face():
-    """
-    Registers face images for a given roll number.
-    Expects 'rollNumber' in form data and a list of 'images' files.
-    """
     roll_number = request.form.get("rollNumber", "").strip().lower()
     if not roll_number:
         return jsonify({"error": "Roll Number is required for face registration"}), 400
@@ -116,30 +123,33 @@ def register_face():
     if len(images) < 3:
         return jsonify({"error": "At least 3 images required for face registration"}), 400
 
-    # Create a subfolder for the roll number if it doesn't exist
-    person_dir = os.path.join(DATASET_DIR, roll_number)
-    os.makedirs(person_dir, exist_ok=True)
+    uploaded_image_urls = []
 
-    # Determine the starting index for new images to avoid overwriting existing ones
-    existing_count = len(os.listdir(person_dir))
-    image_idx = existing_count + 1
-
-    for image_file in images:
+    for idx, image_file in enumerate(images):
         npimg = np.frombuffer(image_file.read(), np.uint8)
         img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
+
         if img is None:
             return jsonify({"error": f"Could not decode image {image_file.filename}"}), 400
-        
-        image_path = os.path.join(person_dir, f"img_{image_idx}.jpg")
-        cv2.imwrite(image_path, img)
-        image_idx += 1 # Increment for the next image
 
-    # After new images are saved, rebuild the embeddings database and reload it into memory
-    save_embeddings()    # Rebuilds and saves embeddings to embeddings.pkl
-    reload_embeddings() # Reloads the updated embeddings.pkl into the in-memory KNOWN_EMBEDS
+        temp_path = f"/tmp/{roll_number}_img_{idx}.jpg"
+        cv2.imwrite(temp_path, img)
 
-    print(f"Face data for Roll Number {roll_number} registered successfully with {len(images)} images.")
-    return jsonify({"message": f"Face data for Roll Number {roll_number} registered successfully with {len(images)} images."}), 200
+        result = cloudinary.uploader.upload(temp_path, folder=f"face_attendance/{roll_number}")
+        uploaded_image_urls.append(result["secure_url"])
+        image_file.seek(0) 
+
+    # ✅ Upload embedding to MongoDB
+    success = register_and_upload_embedding(roll_number, images)
+
+    if not success:
+        return jsonify({"error": "Failed to extract face embedding"}), 500
+
+    print(f"✅ Face data for Roll Number {roll_number} uploaded to Cloudinary and MongoDB.")
+    return jsonify({
+        "message": f"Face data for Roll Number {roll_number} uploaded successfully.",
+        "image_urls": uploaded_image_urls
+    }), 200
 
 @app.post("/recognize")
 def recognize():
@@ -256,7 +266,6 @@ if __name__ == "__main__":
     # Initialize/build embeddings on server startup.
     # This ensures embeddings.pkl exists and KNOWN_EMBEDS is populated correctly.
     print("Building/loading initial face embeddings...")
-    save_embeddings()
     reload_embeddings()
     print("Initial embeddings loaded. Server ready.")
 
