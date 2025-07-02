@@ -1,81 +1,80 @@
-# face_utils.py — unified with DeepFace + MTCNN
 import os
 import cv2
-import pickle
 import numpy as np
 from mtcnn import MTCNN
 from deepface import DeepFace
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
-DATASET_DIR     = "dataset"
-EMBEDDINGS_PATH = "embeddings.pkl"
+load_dotenv()
 
+# MongoDB setup
+MONGODB_URI = os.getenv("MONGODB_URI")
+DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0]
+client = MongoClient(MONGODB_URI)
+db = client[DB_NAME]
+collection = db.face_embeddings
+
+# Face detector
 detector = MTCNN()
 
-def save_embeddings():
+def register_and_upload_embedding(roll_number: str, image_files: list) -> bool:
     """
-    Scan dataset/<roll_number> folders,
-    - detect faces with MTCNN
-    - embed with DeepFace / Facenet (128-d)
-    - average per person (identified by roll number)
-    Write one dict  {roll_number: avg_vector}  to embeddings.pkl
+    Detects face in given images, generates embeddings, averages them,
+    and stores in MongoDB (upsert mode).
     """
-    if not os.path.exists(DATASET_DIR):
-        print("❌ dataset/ folder not found.")
-        return
+    embeddings = []
 
-    person_encodings: dict[str, np.ndarray] = {}
-
-    # Iterate through roll numbers (folders) in the dataset directory
-    for roll_number in os.listdir(DATASET_DIR):
-        person_path = os.path.join(DATASET_DIR, roll_number)
-        if not os.path.isdir(person_path):
-            continue  # skip stray files
-
-        embeddings: list[np.ndarray] = []
-
-        for img_file in os.listdir(person_path):
-            if not img_file.lower().endswith((".jpg", ".jpeg", ".png")):
-                continue
-
-            img_path = os.path.join(person_path, img_file)
-            img      = cv2.imread(img_path)
+    for image_file in image_files:
+        try:
+            # Read and decode image
+            npimg = np.frombuffer(image_file.read(), np.uint8)
+            img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
 
             if img is None:
-                print(f"⚠  Cannot read image {img_path}")
+                print("⚠️ Could not decode image.")
                 continue
 
             faces = detector.detect_faces(img)
             if not faces:
-                print(f"❌ No face detected in {img_path}")
+                print("❌ No face detected in image.")
                 continue
 
-            x, y, w, h = faces[0]["box"]
+            x, y, w, h = faces[0]['box']
             x, y = max(0, x), max(0, y)
-            face_crop = img[y:y + h, x:x + w]
+            face_crop = img[y:y+h, x:x+w]
             face_crop = cv2.resize(face_crop, (160, 160))
-            face_rgb  = cv2.cvtColor(face_crop, cv2.COLOR_BGR2RGB)
+            face_rgb = cv2.cvtColor(face_crop, cv2.COLOR_BGR2RGB)
 
-            try:
-                rep = DeepFace.represent(
-                    img_path=face_rgb,
-                    model_name="Facenet",
-                    enforce_detection=False
-                )
-                embeddings.append(np.array(rep[0]["embedding"]))
-            except Exception as e:
-                print(f"⚠  DeepFace failed on {img_path}: {e}")
+            # Get FaceNet embedding using DeepFace
+            rep = DeepFace.represent(
+                img_path=face_rgb,
+                model_name="Facenet",
+                enforce_detection=False
+            )
 
-        # average and store using roll_number as the key
-        if embeddings:
-            person_encodings[roll_number] = np.mean(embeddings, axis=0)
-            print(f"✅ {roll_number}: averaged {len(embeddings)} embeddings")
-        else:
-            print(f"⚠  {roll_number}: no valid face embeddings collected")
+            embeddings.append(np.array(rep[0]["embedding"]))
 
-    # ---- write pickle only if we have data ----
-    if person_encodings:
-        with open(EMBEDDINGS_PATH, "wb") as f:
-            pickle.dump(person_encodings, f)
-        print(f"🚀 Saved averaged embeddings for {len(person_encodings)} people.")
-    else:
-        print("🛑 No embeddings written (empty database).")
+        except Exception as e:
+            print(f"⚠️ Error during embedding: {e}")
+            continue
+
+    if not embeddings:
+        print(f"🛑 No valid embeddings generated for {roll_number}")
+        return False
+
+    avg_embedding = np.mean(embeddings, axis=0)
+
+    # Upload to MongoDB
+    try:
+        collection.update_one(
+            {"rollNumber": roll_number},
+            {"$set": {"embedding": avg_embedding.tolist()}},
+            upsert=True
+        )
+        print(f"✅ MongoDB embedding saved for {roll_number}")
+        return True
+
+    except Exception as e:
+        print(f"❌ Failed to save embedding to MongoDB: {e}")
+        return False
