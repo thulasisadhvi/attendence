@@ -1,7 +1,8 @@
-flask
+Flask
 gunicorn
 deepface
 mtcnn
 opencv-python
 numpy
 tensorflow>=2.8.0,<2.15.0
+pymongo[srv]>=4.0
