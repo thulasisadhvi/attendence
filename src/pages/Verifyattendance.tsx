@@ -204,7 +204,7 @@ const VerifyAttendancePage: React.FC = () => {
 
         try {
           // Send image to Flask for face recognition
-          const flaskResponse = await fetch("http://localhost:8000/recognize", {
+          const flaskResponse = await fetch("https://flask-jzc9.onrender.com/recognize", {
             method: "POST",
             body: formData,
           });
