@@ -21,7 +21,7 @@ const ResetPasswordPage: React.FC = () => {
   const tokenFromUrl = searchParams.get('token');
 
   // Ensure this matches your Flask backend's port
-  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+  const API_BASE = import.meta.env.VITE_API_BASE_URL || 'https://flask-jzc9.onrender.com';
 
   // Effect to handle initial checks or redirect if email/token are missing
   useEffect(() => {
