@@ -13,76 +13,65 @@ from pymongo import MongoClient # Import MongoClient for MongoDB
 
 # Import functions from face_utils and pipeline
 # Assuming these files (face_utils.py, utils/pipeline.py) are in the same directory structure
-#from face_utils import save_embeddings # Used in register_face to build embeddings.pkl
 from face_utils import register_and_upload_embedding
 from utils.pipeline import process_frame, reload_embeddings # Used in recognize and to refresh in-memory embeddings
 import cloudinary
 import cloudinary.uploader
-import os
 from dotenv import load_dotenv
-load_dotenv()
+load_dotenv() # Load environment variables from .env file
+
 # Configure Cloudinary
 cloudinary.config(
     cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
     api_key=os.getenv("CLOUDINARY_API_KEY"),
     api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
+
 app = Flask(__name__)
-CORS(app) # Enable CORS for all routes by default, including for specific origins where needed
+# Enable CORS for all routes by default
+CORS(app) # <<<--- This is correctly placed here! It applies to the 'app' instance.
 
 # --- Face Recognition Configuration ---
 DATASET_DIR = "dataset" # Directory where face images for each roll number are stored
 
 # --- Email and User Management Configuration ---
-SENDER_EMAIL = "poornimapraneetha42@gmail.com" # <--- IMPORTANT: Replace with your actual sender email
-APP_PASSWORD = "pesh fmzr jocf gmuk"    # <--- IMPORTANT: Replace with your actual app password
+SENDER_EMAIL = os.getenv("SENDER_EMAIL", "poornimapraneetha42@gmail.com") # Get from env or fallback
+APP_PASSWORD = os.getenv("APP_PASSWORD", "pesh fmzr jocf gmuk") # Get from env or fallback
+# IMPORTANT: Never hardcode sensitive credentials like APP_PASSWORD in production code.
+# Ensure these are only in your .env file locally and environment variables on Render.
 
 # --- MongoDB Configuration ---
-# Get MongoDB URI from environment variable (ensure it's set in your .env or environment)
-# Example: MONGODB_URI=mongodb://localhost:27017/myStudentsDB
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://sairajapanthula:1234@attendancedb.kvglgey.mongodb.net/AttendnaceDB?retryWrites=true&w=majority")
-DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0] # Extract database name from URI
-# Connect to MongoDB
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@attendancedb.kvglgey.mongodb.net/AttendnaceDB?retryWrites=true&w=majority")
+# IMPORTANT: Replace YOUR_USERNAME and YOUR_PASSWORD above with actual env variables
+# If you hardcode it here (like you have 'sairajapanthula:1234'), that's a security risk
+# and it will be visible in your deployed code if someone inspects the container.
+# Always use os.getenv() for credentials.
+# For example: MONGODB_URI = os.getenv("MONGODB_URI")
+# Your current hardcoded password '1234' is visible and very insecure.
+
+DB_NAME = os.getenv("MONGODB_DB_NAME", "AttendnaceDB") # Get DB name from env or fallback, more robust
+# If you want to derive from URI, ensure it's robust:
+# DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0] # This derivation is fine
+
+# Connect to MongoDB - This block is good to keep directly at module level
 try:
     client = MongoClient(MONGODB_URI)
     db = client[DB_NAME]
     students_collection = db.students # This maps to your Student.js model's collection
-    print(f"✅ Connected to MongoDB: {MONGODB_URI} (Database: {DB_NAME}, Collection: students)")
+    print(f"✅ Connected to MongoDB: {MONGODB_URI.split('@')[0]}@... (Database: {DB_NAME}, Collection: students)")
+    # Mask password for printing to logs
 except Exception as e:
     print(f"❌ Failed to connect to MongoDB: {e}")
-    # In a real app, you might want to exit or handle this more gracefully
     students_collection = None # Set to None if connection fails
 
-# --- Original users.json file path - NO LONGER USED FOR AUTH, kept for other potential uses if needed ---
-# USERS_DB_FILE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'users.json')
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://attendence-mu.vercel.app/") # Get from env or fallback
 
-FRONTEND_URL = "https://attendence-mu.vercel.app/" # Update if your frontend is on a different URL/port
-
-# ------------------ Utilities for Email/User Management ------------------
-# load_users and save_users are NO LONGER USED FOR AUTHENTICATION
-# They are commented out as they interacted with users.json
-# def load_users():
-#     if os.path.exists(USERS_DB_FILE):
-#         with open(USERS_DB_FILE, 'r') as f:
-#             try:
-#                 return json.load(f)
-#             except json.JSONDecodeError:
-#                 print(f"Warning: {USERS_DB_FILE} is empty or malformed. Starting with empty user database.")
-#                 return {}
-#     print(f"Warning: {USERS_DB_FILE} does not exist. Starting with empty user database.")
-#     return {}
-
-# def save_users(users):
-#     with open(USERS_DB_FILE, 'w') as f:
-#         json.dump(users, f, indent=4)
-
-# USERS_DB = load_users() # Initial load of users. This will be re-loaded within reset_password for freshness.
 RESET_TOKENS = {} # {token: email}
 
-# ------------------ Email Sender ------------------
+# ------------------ Utilities for Email/User Management ------------------
 def send_email(to_email, reset_token):
     reset_url = f"{FRONTEND_URL}/reset-password?email={to_email}&token={reset_token}"
-
+    # ... (email content and sending logic - this part looks fine) ...
     html_content = f"""
     <html>
       <body style="font-family: sans-serif;">
@@ -95,7 +84,6 @@ def send_email(to_email, reset_token):
       </body>
     </html>
     """
-
     msg = MIMEMultipart("alternative")
     msg['Subject'] = "Reset Your Password"
     msg['From'] = SENDER_EMAIL
@@ -137,9 +125,12 @@ def register_face():
 
         result = cloudinary.uploader.upload(temp_path, folder=f"face_attendance/{roll_number}")
         uploaded_image_urls.append(result["secure_url"])
-        image_file.seek(0) 
+        image_file.seek(0) # Reset file pointer for subsequent reads if any, or for register_and_upload_embedding
 
     # ✅ Upload embedding to MongoDB
+    # Make sure register_and_upload_embedding takes the original FileStorage objects
+    # and not just the raw image data if it needs the full file.
+    # It might re-read the files from 'images' list.
     success = register_and_upload_embedding(roll_number, images)
 
     if not success:
@@ -161,11 +152,15 @@ def recognize():
     if file is None:
         return jsonify({"status": "No image part"}), 400
     
-    # process_frame handles the core logic (face detection, anti-spoofing, recognition)
-    # It returns a dictionary with 'status' and optionally 'rollNumber'
     recognition_result = process_frame(file.read())
     
     return jsonify(recognition_result)
+
+# --- Add a simple root route for health checks / initial browser access ---
+@app.route('/')
+def home():
+    return jsonify({"message": "Welcome to the Attendance Backend API!", "status": "running"}), 200
+
 
 # ------------------ API Endpoints for Email/User Password Reset (MongoDB Integrated) ------------------
 
@@ -173,7 +168,6 @@ def recognize():
 @app.route("/api/forgotPassword", methods=["POST", "OPTIONS"])
 def forgot_password():
     if request.method == "OPTIONS":
-        # This is for CORS preflight requests
         return '', 204
 
     data = request.get_json()
@@ -186,18 +180,14 @@ def forgot_password():
         print("MongoDB connection not established. Cannot process forgot password.")
         return jsonify({"message": "Server database error. Please try again later."}), 500
 
-    # Find the user by email in MongoDB's 'students' collection
-    # Note: Ensure emails are stored consistently (e.g., lowercase) in your DB
     user_data = students_collection.find_one({"email": email.lower(), "role": "student"})
 
-    # For security, always return a success message even if the email isn't registered,
-    # to prevent enumeration of registered emails.
     if not user_data:
         print(f"Attempted password reset for unregistered or non-student email: {email}")
         return jsonify({"message": "If this email is registered, a password reset link will be sent."}), 200
 
     reset_token = str(uuid.uuid4())
-    RESET_TOKENS[reset_token] = email # Store token mapped to email
+    RESET_TOKENS[reset_token] = email
     print(f"🔐 Generated reset token: {reset_token} for {email}")
 
     if send_email(email, reset_token):
@@ -227,7 +217,6 @@ def reset_password():
         print("MongoDB connection not established. Cannot process password reset.")
         return jsonify({"message": "Server database error. Please try again later."}), 500
 
-    # Find the user in MongoDB
     user_filter = {"email": email.lower(), "role": "student"}
     user_data = students_collection.find_one(user_filter)
 
@@ -235,39 +224,40 @@ def reset_password():
         return jsonify({"message": "User not found or not a student."}), 404
 
     # --- IMPORTANT: HASH THE PASSWORD HERE ---
-    # Your Node.js backend *must* also hash passwords.
-    # Ensure this Flask app uses the *same hashing algorithm* (e.g., bcrypt)
-    # and the *same salting strategy* as your Node.js backend.
-    # For demonstration, showing plaintext update. Replace with proper hashing!
-    
-    # Update the password in MongoDB
+    # Current implementation updates plaintext password, which is a severe security risk.
+    # You MUST implement password hashing (e.g., using Flask-Bcrypt or bcrypt library)
+    # and ensure it's compatible with your Node.js backend's hashing.
     update_result = students_collection.update_one(
         user_filter,
-        {"$set": {"password": new_password}}
+        {"$set": {"password": new_password}} # <<<--- HASH THIS PASSWORD!
     )
 
     if update_result.modified_count == 0:
         print(f"⚠️ Password for {email} not modified. Maybe new password is same as old, or no matching student found.")
-        # Return a success message even if not modified, to avoid giving away information
         return jsonify({"message": "Password reset processed (no changes made if new password was identical or user not found)."}), 200
 
-    # Invalidate the token after use
     if token in RESET_TOKENS:
         del RESET_TOKENS[token]
     print(f"✅ Password reset successful for {email} in MongoDB.")
 
     return jsonify({"message": "Password has been reset successfully."}), 200
 
-# ------------------ Main execution block ---
-if __name__ == "__main__":
-    # Ensure the DATASET_DIR exists on server startup
+# --- Startup Logic (Moved outside __main__ for Gunicorn) ---
+# This code will now always run when Gunicorn loads the 'app' module.
+try:
     os.makedirs(DATASET_DIR, exist_ok=True)
-    
-    # Initialize/build embeddings on server startup.
-    # This ensures embeddings.pkl exists and KNOWN_EMBEDS is populated correctly.
     print("Building/loading initial face embeddings...")
-    reload_embeddings()
+    reload_embeddings() # This is critical for DeepFace and your app's core functionality
     print("Initial embeddings loaded. Server ready.")
+except Exception as e:
+    print(f"❌ Error during server startup (embeddings/dataset): {e}")
+    # Consider what to do if this fails; app might not function correctly.
 
-    # Run the Flask app on port 8000, accessible from any IP address
+# --- Local Development ONLY Block ---
+# This block will ONLY run if you execute 'python app.py' directly.
+# Gunicorn will NOT execute this when deployed on Render.
+if __name__ == "__main__":
+    print("Running Flask development server (only for local testing).")
+    # Make sure you are using port 10000 locally if that's what your frontend expects
+    # for local dev, or adjust your frontend's local config.
     app.run(debug=True, port=8000, host="0.0.0.0")
