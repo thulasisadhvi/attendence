@@ -26,7 +26,7 @@ const StudentContext = createContext<StudentContextType | undefined>(undefined);
 export const StudentProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [students, setStudents] = useState<Student[]>([]);
   // IMPORTANT: Set this to the URL where your Node.js backend is running
-  const API_BASE_URL = 'http://localhost:5000/api/students';
+  const API_BASE_URL = 'https://attendence-vo5j.onrender.com';
 
   // Function to fetch students from the backend API
   const fetchStudents = async () => {
