@@ -40,7 +40,7 @@ APP_PASSWORD = "pesh fmzr jocf gmuk"    # <--- IMPORTANT: Replace with your actu
 # --- MongoDB Configuration ---
 # Get MongoDB URI from environment variable (ensure it's set in your .env or environment)
 # Example: MONGODB_URI=mongodb://localhost:27017/myStudentsDB
-MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://sairajapanthula:YOUR_NEW_SECURE_PASSWORD@attendancedb.kvglgey.mongodb.net/AttendnaceDB?retryWrites=true&w=majority")
+MONGODB_URI = os.getenv("MONGODB_URI", "mongodb+srv://sairajapanthula:1234@attendancedb.kvglgey.mongodb.net/AttendnaceDB?retryWrites=true&w=majority")
 DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0] # Extract database name from URI
 # Connect to MongoDB
 try:
