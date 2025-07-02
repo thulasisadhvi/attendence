@@ -11,3 +11,4 @@ torchvision
 torchaudio
 Pillow    
 python-dotenv
+cloudinary
