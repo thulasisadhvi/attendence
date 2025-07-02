@@ -1,33 +1,37 @@
-# utils/pipeline.py
+# ---------- ENVIRONMENT SETUP: Place this at the very top ----------
 import os
-os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
-os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
-os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
-os.environ["TF_USE_MPS"] = "0"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"         # Suppress TF logs
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"         # Disable CUDA GPU
+os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"         # Avoid ONEDNN errors
+os.environ["TF_USE_MPS"] = "0"                    # Avoid Apple MPS errors
 
-import tensorflow as tf
+# ---------- Do NOT import tensorflow, deepface or any dependent packages yet ----------
 
-
+# ---------- PATH SETUP ----------
 from pathlib import Path
 import pickle, csv
 from datetime import datetime
 import cv2, numpy as np
 from numpy.linalg import norm
+import sys
+from dotenv import load_dotenv
+
+# TensorFlow must be imported ONLY after environment vars are set
+import tensorflow as tf
+  # ✅ Do this before importing DeepFace
+
+# ✅ Now import DeepFace (uses TensorFlow internally)
 from deepface import DeepFace
 from mtcnn import MTCNN
-import sys
 
-# --- CORRECTED PATH LOGIC ---
-# HERE points to Project4.0/backend/utils/
+# Load environment variables
+load_dotenv()
+
+# ----- Setup for anti-spoofing model path -----
 HERE = Path(__file__).resolve().parent
-# ROOT should point to Project4.0/backend/ (i.e., the parent of 'utils')
 ROOT = HERE.parent
-
-# Add the Silent-Face-Anti-Spoofing directory to Python's path
-# This makes 'src' directly importable from within it.
 sys.path.append(str(ROOT / "Silent-Face-Anti-Spoofing"))
 
-# Now, 'src' module should be found
 from src.anti_spoof_predict import AntiSpoofPredict
 # --- END CORRECTED PATH LOGIC ---
 
@@ -42,16 +46,31 @@ MODEL_PATH = (
 PREDICTOR  = AntiSpoofPredict(device_id=0)
 
 # ---------- Load Embeddings DB ----------
-def _load_db() -> dict[str, np.ndarray]:
-    """Loads face embeddings from embeddings.pkl."""
-    pkl_path = ROOT / "embeddings.pkl" # Path to embeddings.pkl in the backend root
-    if not pkl_path.exists() or os.path.getsize(pkl_path) == 0:
-        print("ℹ No embeddings found (or file is empty), returning empty DB.")
-        return {}
-    with open(pkl_path, "rb") as f:
-        raw = pickle.load(f)
-    return {n: np.array(v) for n, v in raw.items()}
+from pymongo import MongoClient
+from dotenv import load_dotenv
 
+load_dotenv()
+
+def _load_db() -> dict[str, np.ndarray]:
+    """Loads face embeddings from MongoDB."""
+    try:
+        MONGODB_URI = os.getenv("MONGODB_URI")
+        DB_NAME = MONGODB_URI.split('/')[-1].split('?')[0]
+        client = MongoClient(MONGODB_URI)
+        db = client[DB_NAME]
+        collection = db.face_embeddings
+
+        known = {}
+        for doc in collection.find():
+            roll = doc.get("rollNumber")
+            emb  = doc.get("embedding")
+            if roll and emb:
+                known[roll] = np.array(emb)
+        print(f"✅ Loaded {len(known)} embeddings from MongoDB.")
+        return known
+    except Exception as e:
+        print(f"❌ Failed to load embeddings from MongoDB: {e}")
+        return {}
 # In-memory dictionary to store known face embeddings
 KNOWN_EMBEDS = _load_db()
 
