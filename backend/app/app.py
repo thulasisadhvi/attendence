@@ -29,7 +29,7 @@ cloudinary.config(
 
 app = Flask(__name__)
 # Enable CORS for all routes by default
-CORS(app) # <<<--- This is correctly placed here! It applies to the 'app' instance.
+CORS(app, resources={r"/*": {"origins": "https://attendence-mu.vercel.app"}}) # <<<--- This is correctly placed here! It applies to the 'app' instance.
 
 # --- Face Recognition Configuration ---
 DATASET_DIR = "dataset" # Directory where face images for each roll number are stored
