@@ -64,7 +64,7 @@ except Exception as e:
     print(f"❌ Failed to connect to MongoDB: {e}")
     students_collection = None # Set to None if connection fails
 
-FRONTEND_URL = os.getenv("FRONTEND_URL", "https://attendence-mu.vercel.app/") # Get from env or fallback
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://attendence-mu.vercel.app") # Get rom env or fallback
 
 RESET_TOKENS = {} # {token: email}
 
